@@ -323,7 +323,7 @@ class PhoneInput extends React.Component {
     let newSelectedCountry, formattedNumber;
 
     // if new value start with selectedCountry.dialCode, format number, otherwise find newSelectedCountry
-    if (selectedCountry && startsWith(value, prefix + selectedCountry.dialCode)) {
+    if (this.props.disableCountryGuess || (selectedCountry && startsWith(value, prefix + selectedCountry.dialCode))) {
       formattedNumber = this.formatNumber(inputNumber, selectedCountry);
       this.setState({ formattedNumber });
     }
