@@ -50,6 +50,7 @@ class PhoneInput extends React.Component {
     ]),
 
     disableCountryCode: PropTypes.bool,
+    disableCountryGuess: PropTypes.bool,
     disableDropdown: PropTypes.bool,
     enableLongNumbers: PropTypes.bool,
     countryCodeEditable: PropTypes.bool,
@@ -124,6 +125,7 @@ class PhoneInput extends React.Component {
     enableAreaCodes: false,
     enableTerritories: false,
     disableCountryCode: false,
+    disableCountryGuess: false,
     disableDropdown: false,
     enableLongNumbers: false,
     countryCodeEditable: true,
@@ -534,7 +536,7 @@ class PhoneInput extends React.Component {
       // we don't need to send the whole number to guess the country... only the first 6 characters are enough
       // the guess country function can then use memoization much more effectively since the set of input it
       // gets has drastically reduced
-      if (!this.state.freezeSelection || selectedCountry.dialCode.length > inputNumber.length) {
+      if (!this.props.disableCountryGuess && (!this.state.freezeSelection || selectedCountry.dialCode.length > inputNumber.length)) {
         newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
         freezeSelection = false;
       }
