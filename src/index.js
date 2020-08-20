@@ -180,7 +180,7 @@ class PhoneInput extends React.Component {
     let countryGuess;
     if (props.disableInitialCountryGuess) {
       countryGuess = 0;
-    } else if (inputNumber.length > 1) {
+    } else if (inputNumber.length > 1 && !disableCountryGuess) {
       // Country detect by phone
       countryGuess = this.guessSelectedCountry(inputNumber.substring(0, 6), props.country, onlyCountries, hiddenAreaCodes) || 0;
     } else if (props.country) {
