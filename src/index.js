@@ -182,7 +182,8 @@ class PhoneInput extends React.Component {
       countryGuess = 0;
     } else if (inputNumber.length > 1 && !this.props.disableCountryGuess) {
       // Country detect by phone
-      countryGuess = this.guessSelectedCountry(inputNumber.substring(0, 6), props.country, onlyCountries, hiddenAreaCodes) || 0;
+      // countryGuess = this.guessSelectedCountry(inputNumber.substring(0, 6), props.country, onlyCountries, hiddenAreaCodes) || 0;
+      countryGuess = props.country;
     } else if (props.country) {
       // Default country
       countryGuess = onlyCountries.find(o => o.iso2 == props.country) || 0;
@@ -237,10 +238,10 @@ class PhoneInput extends React.Component {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.country !== this.props.country && !this.props.disableCountryGuess) {
-      this.updateCountry(nextProps.country);
+      // this.updateCountry(nextProps.country);
     }
     else if (nextProps.value !== this.props.value && !this.props.disableCountryGuess) {
-      this.updateFormattedNumber(nextProps.value);
+      // this.updateFormattedNumber(nextProps.value);
     }
   }
 
@@ -328,7 +329,7 @@ class PhoneInput extends React.Component {
       this.setState({ formattedNumber });
     }
     else {
-      newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
+      // newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
       const dialCode = newSelectedCountry && startsWith(inputNumber, prefix + newSelectedCountry.dialCode) ? newSelectedCountry.dialCode : '';
 
       formattedNumber = this.formatNumber(
@@ -537,7 +538,7 @@ class PhoneInput extends React.Component {
       // the guess country function can then use memoization much more effectively since the set of input it
       // gets has drastically reduced
       if (!this.props.disableCountryGuess && (!this.state.freezeSelection || selectedCountry.dialCode.length > inputNumber.length)) {
-        newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
+        // newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
         freezeSelection = false;
       }
       formattedNumber = this.formatNumber(inputNumber, newSelectedCountry);
