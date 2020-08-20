@@ -180,7 +180,7 @@ class PhoneInput extends React.Component {
     let countryGuess;
     if (props.disableInitialCountryGuess) {
       countryGuess = 0;
-    } else if (inputNumber.length > 1 && !disableCountryGuess) {
+    } else if (inputNumber.length > 1 && !this.props.disableCountryGuess) {
       // Country detect by phone
       countryGuess = this.guessSelectedCountry(inputNumber.substring(0, 6), props.country, onlyCountries, hiddenAreaCodes) || 0;
     } else if (props.country) {
@@ -236,10 +236,10 @@ class PhoneInput extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.country !== this.props.country) {
+    if (nextProps.country !== this.props.country && !this.props.disableCountryGuess) {
       this.updateCountry(nextProps.country);
     }
-    else if (nextProps.value !== this.props.value) {
+    else if (nextProps.value !== this.props.value && !this.props.disableCountryGuess) {
       this.updateFormattedNumber(nextProps.value);
     }
   }

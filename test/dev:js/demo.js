@@ -115,6 +115,8 @@ class Demo extends React.Component {
           <PhoneInput
             country='ca'
             regions={['north-america', 'carribean']}
+            disableCountryGuess
+            // disableInitialCountryGuess
           />
           <p>Disabled dropdown and country code</p>
           <PhoneInput
